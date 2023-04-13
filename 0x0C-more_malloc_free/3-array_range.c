@@ -19,5 +19,5 @@ if (ptr == NULL)
 return (NULL);
 for (i = 0; min <= max; i++)
 ptr[i] = min++;
-return (ptr);		
+return (ptr);
 }

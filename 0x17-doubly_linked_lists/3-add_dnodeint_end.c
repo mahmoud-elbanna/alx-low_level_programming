@@ -1,43 +1,34 @@
-#include <stdio.h>
-#include <stdlib.h>
 #include "lists.h"
+#include <stdlib.h>
 
 /**
-* *add_dnodeint_end - that adds a new node at the end of a list
-* @head: variable pointer to pointer
-* @n: value
-* Return: the address of the new element, or NULL if it failed
-*/
-
+ * add_dnodeint_end - adds a node to the end of a linked list
+ * @head: double pointer to the beginning of the linked list
+ * @n: value to add to new node
+ *
+ * Return: pointer to the new node, or NULL on failure
+ */
 dlistint_t *add_dnodeint_end(dlistint_t **head, const int n)
 {
-	dlistint_t *newNode;
-	dlistint_t *i = *head;
+	dlistint_t *new, *tmp;
 
-	newNode = malloc(sizeof(dlistint_t));
-	if (newNode == NULL)
-	{
-		free(newNode);
+	if (head == NULL)
 		return (NULL);
-	}
-	newNode->next = NULL;
-	newNode->prev = NULL;
-	newNode->n = n;
-
+	new = malloc(sizeof(dlistint_t));
+	if (new == NULL)
+		return (NULL);
+	new->n = n;
+	new->next = NULL;
 	if (*head == NULL)
 	{
-		*head = newNode;
-		return (*head);
+		new->prev = NULL;
+		*head = new;
+		return (new);
 	}
-
-	while (i->next != NULL)
-	{
-		i = i->next;
-	}
-
-	i->next = newNode;
-	newNode->prev = i;
-
-	return (newNode);
+	tmp = *head;
+	while (tmp->next != NULL)
+		tmp = tmp->next;
+	tmp->next = new;
+	new->prev = tmp;
+	return (new);
 }
-
